@@ -1,25 +1,32 @@
-let paciente = document.querySelector("#primeiro-paciente");
-let tdPeso = paciente.querySelector(".info-peso");
-let tdAltura = paciente.querySelector(".info-altura");
+let pacientes = document.querySelectorAll(".paciente");
 
-let peso = tdPeso.textContent;
-let altura = tdAltura.textContent;
+for (i = 0; i < pacientes.length; i++) {
+    let paciente = pacientes[i];
 
-let imc = peso / (altura * altura);
-let tdImc = paciente.querySelector(".info-imc");
+    let tdPeso = paciente.querySelector(".info-peso");
+    let tdAltura = paciente.querySelector(".info-altura");
+    let tdImc = paciente.querySelector(".info-imc");
 
-let pesoReal = true;
-let alturaReal = true;
-if(peso <= 0 || peso >= 1000){
-    pesoReal = false;
-    tdImc.textContent = "Peso Inválido!";
-}
+    let peso = tdPeso.textContent;
+    let altura = tdAltura.textContent;
 
-if(altura <=0 || altura >= 3){
-    alturaReal = false;
-    tdImc.textContent = "Altura Inválida!";
-}
+    let pesoReal = true;
+    let alturaReal = true;
 
-if(pesoReal == true && alturaReal == true){
-    tdImc.textContent = imc;
+    if (peso <= 0 || peso >= 1000) {
+        pesoReal = false;
+        tdImc.textContent = "Peso Inválido!";
+        paciente.classList.add("paciente-invalido");
+    }
+
+    if (altura <= 0 || altura >= 3) {
+        alturaReal = false;
+        tdImc.textContent = "Altura Inválida!";
+        paciente.classList.add("paciente-invalido");
+    }
+
+    if (pesoReal && alturaReal) {
+        let imc = peso / (altura * altura)
+        tdImc.textContent = imc.toFixed(2);
+    }
 }
