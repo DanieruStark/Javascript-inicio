@@ -6,18 +6,15 @@ botaoAdicionar.addEventListener("click", function (e) {
 
     let paciente = pacienteRecived(form);
 
-    let pacienteTr = montaTr(paciente);
-
     let erros = validaPaciente(paciente);
 
-    if (erros.length > 0){
+    if (erros.length > 0) {
         exibeMensagensDeErro(erros);
 
         return;
     }
 
-    let tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(pacienteTr);
+    addPacientesNaTable();
 
     form.reset();
 
@@ -58,7 +55,6 @@ function montaTd(dado, classe) {
     return td;
 }
 
-
 function validaPaciente(paciente) {
     let erros = [];
 
@@ -85,13 +81,19 @@ function validaPaciente(paciente) {
     return erros;
 }
 
-function exibeMensagensDeErro(erros){
+function exibeMensagensDeErro(erros) {
     let ul = document.querySelector("#mensagens-erro");
     ul.innerHTML = "";
 
-    erros.forEach(function(erro){
+    erros.forEach(function (erro) {
         let li = document.createElement("li");
         li.textContent = erro;
         ul.appendChild(li);
     });
+}
+
+function addPacientesNaTable(paciente) {
+    let pacienteTr = montaTr(paciente);
+    let tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
 }
